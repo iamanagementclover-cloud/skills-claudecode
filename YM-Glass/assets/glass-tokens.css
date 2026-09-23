@@ -1,0 +1,193 @@
+/* YM-Glass — miroir de référence des tokens réels du projet Litchi.
+   Source de vérité : src/app/globals.css (lignes 60-207, 320-519). Si ce fichier
+   projet change, ce miroir doit être resynchronisé — ne jamais le laisser diverger.
+   Ne pas redéfinir ces variables ailleurs dans le projet : les composants Litchi
+   les consomment déjà via Tailwind (@theme inline) et via les sélecteurs [data-slot="*"]
+   câblés en bas de ce fichier. */
+
+:root {
+  /* Couleurs de marque et sémantiques — identiques clair/sombre sauf mention */
+  --primary: oklch(0.875 0.238 150.6);      /* vert vif — couleur de marque Litchi */
+  --primary-glow: oklch(0.92 0.2 150.6);
+  --primary-foreground: oklch(0.21 0.033 127.3); /* texte sombre sur fond primary (primary est clair) */
+  --accent: #f8015a;                         /* magenta — accent ponctuel, jamais fond de surface large */
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.6 0.22 22);         /* rouge-orangé — suppression/erreur */
+  --success: oklch(0.65 0.15 155);
+  --success-foreground: oklch(0.99 0.01 155);
+  --warning: oklch(0.78 0.15 75);
+  --warning-foreground: oklch(0.28 0.08 75);
+  --ring: var(--primary);                    /* anneau de focus = couleur de marque, pas un bleu générique */
+
+  /* Neutres clair */
+  --background: oklch(0.995 0.002 260);
+  --foreground: oklch(0.16 0.02 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.02 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.02 265);
+  --secondary: oklch(0.96 0.008 265);
+  --secondary-foreground: oklch(0.22 0.03 265);
+  --muted: oklch(0.96 0.008 265);
+  --muted-foreground: oklch(0.5 0.02 265);
+  --border: oklch(0.91 0.01 265);
+  --input: oklch(0.91 0.01 265);
+
+  --radius: 0.75rem; /* base — toutes les autres tailles en dérivent, ne jamais coder un rayon en dur */
+  --radius-sm: calc(var(--radius) * 0.5);   /* 6px */
+  --radius-md: calc(var(--radius) * 0.75);  /* 9px */
+  --radius-lg: var(--radius);               /* 12px */
+  --radius-xl: calc(var(--radius) * 1.35);  /* 16.2px */
+  --radius-2xl: calc(var(--radius) * 1.75); /* 21px */
+  --radius-3xl: calc(var(--radius) * 2.2);  /* 26.4px */
+  --radius-4xl: calc(var(--radius) * 2.6);  /* 31.2px */
+
+  /* ---- Liquid Glass — clair ---- */
+  --lg-canvas-a: #f6ecd8; /* crème chaud */
+  --lg-canvas-b: #d3e9e6; /* teal d'eau */
+  --lg-canvas-c: #d2d6dc; /* gris — fond html de secours */
+  --lg-canvas-d: #e3d9f5; /* mauve */
+  --lg-white: 210, 214, 220;
+  --lg-border-contrast: rgba(100, 116, 139, 0.35);
+  --lg-shadow-rgb: 28, 36, 48; /* navy, jamais noir pur — la teinte fait la différence */
+  --lg-scrim: rgba(20, 26, 35, 0.28);
+
+  --lg-1-bg: rgba(var(--lg-white), 0.1);
+  --lg-1-blur: 8px;
+  --lg-1-sat: 180%;
+  --lg-1-border: color-mix(in oklch, var(--lg-border-contrast) 55%, rgba(var(--lg-white), 0.45));
+  --lg-1-shadow: 0 8px 32px rgba(var(--lg-shadow-rgb), 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -12px 20px -14px rgba(var(--lg-shadow-rgb), 0.12);
+
+  --lg-2-bg: rgba(var(--lg-white), 0.16);
+  --lg-2-blur: 8px;
+  --lg-2-sat: 190%;
+  --lg-2-border: color-mix(in oklch, var(--lg-border-contrast) 50%, rgba(var(--lg-white), 0.55));
+  --lg-2-shadow: 0 10px 30px rgba(var(--lg-shadow-rgb), 0.09), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -14px 22px -16px rgba(var(--lg-shadow-rgb), 0.14);
+
+  --lg-3-bg: rgba(var(--lg-white), 0.24);
+  --lg-3-blur: 16px;
+  --lg-3-sat: 200%;
+  --lg-3-border: color-mix(in oklch, var(--lg-border-contrast) 45%, rgba(var(--lg-white), 0.65));
+  --lg-3-shadow: 0 14px 34px rgba(var(--lg-shadow-rgb), 0.11), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -16px 24px -16px rgba(var(--lg-shadow-rgb), 0.16);
+
+  --lg-4-bg: rgba(var(--lg-white), 0.38);
+  --lg-4-blur: 14px;
+  --lg-4-sat: 210%;
+  --lg-4-border: color-mix(in oklch, var(--lg-border-contrast) 40%, rgba(var(--lg-white), 0.75));
+  --lg-4-shadow: 0 24px 60px rgba(var(--lg-shadow-rgb), 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 -18px 26px -16px rgba(var(--lg-shadow-rgb), 0.18);
+
+  /* verre teinté marque/danger, dérivé — même formule dans les deux thèmes */
+  --lg-primary-bg: color-mix(in oklch, var(--lg-3-bg), var(--primary) 14%);
+  --lg-primary-bg-hover: color-mix(in oklch, var(--lg-3-bg), var(--primary) 24%);
+  --lg-primary-border: color-mix(in oklch, var(--primary) 45%, var(--lg-border-contrast));
+  --lg-primary-shadow: 0 10px 28px color-mix(in oklch, var(--primary) 24%, transparent), inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -14px 20px -12px color-mix(in oklch, var(--primary) 16%, transparent);
+
+  --lg-destructive-bg: color-mix(in oklch, var(--lg-2-bg), var(--destructive) 16%);
+  --lg-destructive-bg-hover: color-mix(in oklch, var(--lg-2-bg), var(--destructive) 28%);
+  --lg-destructive-border: color-mix(in oklch, var(--destructive) 40%, var(--lg-border-contrast));
+}
+
+.dark {
+  --background: oklch(0.15 0.018 265);
+  --foreground: oklch(0.96 0.006 260);
+  --card: oklch(0.19 0.02 265);
+  --card-foreground: oklch(0.96 0.006 260);
+  --popover: oklch(0.185 0.02 265);
+  --popover-foreground: oklch(0.96 0.006 260);
+  --secondary: oklch(0.25 0.02 265);
+  --secondary-foreground: oklch(0.94 0.006 260);
+  --muted: oklch(0.24 0.018 265);
+  --muted-foreground: oklch(0.66 0.02 265);
+  --destructive: oklch(0.68 0.2 22);
+  --success: oklch(0.72 0.16 155);
+  --success-foreground: oklch(0.15 0.04 155);
+  --warning: oklch(0.8 0.15 75);
+  --warning-foreground: oklch(0.2 0.05 75);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  /* primary/primary-foreground/accent/ring : identiques au clair, ne pas redéfinir */
+
+  /* ---- Liquid Glass — sombre ---- */
+  --lg-canvas-a: #4a3a1f;
+  --lg-canvas-b: #17403d;
+  --lg-canvas-c: #101216;
+  --lg-canvas-d: #33285a;
+  --lg-white: 255, 255, 255;
+  --lg-border-contrast: rgba(255, 255, 255, 0.16);
+  --lg-shadow-rgb: 0, 0, 0;
+  --lg-scrim: rgba(0, 0, 0, 0.5);
+
+  --lg-1-bg: rgba(var(--lg-white), 0.06);
+  --lg-1-border: color-mix(in oklch, var(--lg-border-contrast) 45%, rgba(255, 255, 255, 0.1));
+  --lg-1-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -12px 20px -14px rgba(0, 0, 0, 0.5);
+
+  --lg-2-bg: rgba(var(--lg-white), 0.09);
+  --lg-2-border: color-mix(in oklch, var(--lg-border-contrast) 40%, rgba(255, 255, 255, 0.13));
+  --lg-2-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12), inset 0 -14px 22px -16px rgba(0, 0, 0, 0.55);
+
+  --lg-3-bg: rgba(var(--lg-white), 0.13);
+  --lg-3-border: color-mix(in oklch, var(--lg-border-contrast) 35%, rgba(255, 255, 255, 0.16));
+  --lg-3-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.14), inset 0 -16px 24px -16px rgba(0, 0, 0, 0.6);
+
+  --lg-4-bg: rgba(var(--lg-white), 0.18);
+  --lg-4-border: color-mix(in oklch, var(--lg-border-contrast) 30%, rgba(255, 255, 255, 0.22));
+  --lg-4-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.18), inset 0 -18px 26px -16px rgba(0, 0, 0, 0.65);
+  /* lg-N-blur / lg-N-sat : identiques au clair, ne pas redéfinir */
+}
+
+/* Fond applicatif : image plein viewport fixe, sous toutes les surfaces glass */
+html {
+  background: var(--lg-canvas-c);
+}
+body {
+  background: transparent;
+}
+.lg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--lg-canvas-c) url("bg-canvas-light.webp") center center / cover no-repeat;
+  pointer-events: none;
+}
+.dark .lg-canvas {
+  background-image: url("bg-canvas-dark.webp");
+}
+
+/* Classes de niveau glass réutilisables */
+.lg-1, .lg-2, .lg-3, .lg-4 {
+  position: relative;
+  background: var(--lg-1-bg);
+  backdrop-filter: blur(var(--lg-1-blur)) saturate(var(--lg-1-sat));
+  border: 1px solid var(--lg-1-border);
+  box-shadow: var(--lg-1-shadow);
+  border-radius: var(--radius-lg);
+}
+.lg-2 { background: var(--lg-2-bg); backdrop-filter: blur(var(--lg-2-blur)) saturate(var(--lg-2-sat)); border-color: var(--lg-2-border); box-shadow: var(--lg-2-shadow); }
+.lg-3 { background: var(--lg-3-bg); backdrop-filter: blur(var(--lg-3-blur)) saturate(var(--lg-3-sat)); border-color: var(--lg-3-border); box-shadow: var(--lg-3-shadow); }
+.lg-4 { background: var(--lg-4-bg); backdrop-filter: blur(var(--lg-4-blur)) saturate(var(--lg-4-sat)); border-color: var(--lg-4-border); box-shadow: var(--lg-4-shadow); }
+
+/* Halo spéculaire : liseré 1px en dégradé sur le bord haut, simule un reflet de verre.
+   Technique : padding:1px + double mask + mask-composite:exclude ne peint que l'anneau
+   de 1px, jamais l'intérieur — beaucoup plus fin qu'un simple inset shadow. */
+.lg-1::before, .lg-2::before, .lg-3::before, .lg-4::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — Native-Faithful Web Port</title>
+<link rel="stylesheet" href="liquid-glass-native.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="lg-refract" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.010 0.014" numOctaves="2" seed="7" result="noise"/>
+    <feGaussianBlur in="noise" stdDeviation="3" result="softNoise"/>
+    <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="wallpaper"></div>
+
+<div style="max-width:1160px; margin:0 auto; padding:20px 24px 0; font-size:12.5px; line-height:1.6; color:#c9c9d1;">
+  <b style="color:#fff">Web port of this skill</b> — same rules as the SwiftUI patterns in SKILL.md, approximated in CSS: real refraction (SVG <code>feDisplacementMap</code> chained into <code>backdrop-filter</code>), cursor-tracked specular highlight, a morphing nav indicator (CSS analogue of <code>glassEffectID</code>), and — deliberately — a <b>solid</b> Toggle and <b>solid</b> primary button, matching native behavior. Chromium-required for the refraction filter.
+</div>
+
+<div style="display:flex; max-width:1160px; margin:0 auto; padding:20px 24px 40px; gap:16px; min-height:640px;">
+  <nav class="sidebar glass">
+    <div class="brand"><span class="dot"></span> Nimbus</div>
+    <div class="nav-list" id="nav-list">
+      <div class="nav-indicator" id="nav-indicator"></div>
+      <button class="nav-item active" data-nav>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Overview
+      </button>
+      <button class="nav-item" data-nav>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V10M12 19V5M20 19v-7"/></svg>
+        Analytics
+      </button>
+      <button class="nav-item" data-nav>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-nav>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Projects
+      </button>
+      <button class="nav-item" data-nav>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/></svg>
+        Team
+      </button>
+    </div>
+    <div class="nav-item settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82"/></svg>
+      Settings
+    </div>
+  </nav>
+
+  <main>
+    <header>
+      <h1>Overview</h1>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="icon-btn glass interactive">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+        </div>
+        <div class="pill-btn glass interactive">
+          <span style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7c6ae6,#2f6fed);"></span>
+          Salemian
+        </div>
+      </div>
+    </header>
+
+    <section class="grid3">
+      <article class="card glass">
+        <span class="label">Revenu (30j)</span>
+        <span class="value">$36,204</span>
+        <span class="meta">▲ 12.4%</span>
+        <button class="glass-btn" style="margin-top:10px; align-self:flex-start;">+ Choisir un plan</button>
+      </article>
+      <article class="card glass">
+        <span class="label">Utilisateurs actifs</span>
+        <span class="value">3,527</span>
+        <span class="meta">▲ 5.8% ce mois</span>
+      </article>
+      <article class="card glass">
+        <span class="label" style="color:#fff; font-weight:700; font-size:14px;">Profil</span>
+        <div class="glass" style="padding:10px 14px; border-radius:12px; margin-top:6px; color:var(--ink-400); font-size:14px;">Prénom</div>
+        <div class="glass" style="padding:10px 14px; border-radius:12px; margin-top:8px; color:var(--ink-400); font-size:14px;">••••••••</div>
+      </article>
+    </section>
+
+    <section class="lower">
+      <div class="rows-card glass">
+        <h2>Apparence du verre</h2>
+        <div class="row">
+          <div class="row-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/></svg></div>
+          <div class="row-body"><div class="row-title">Translucidité</div><div class="row-desc">Légère teinte colorée sur toutes les surfaces</div></div>
+          <button class="ios-switch on" data-switch><div class="thumb"></div></button>
+        </div>
+        <div class="row">
+          <div class="row-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/></svg></div>
+          <div class="row-body"><div class="row-title">Frost</div><div class="row-desc">Réfraction douce de l'arrière-plan</div></div>
+          <button class="ios-switch on" data-switch><div class="thumb"></div></button>
+        </div>
+        <div class="row">
+          <div class="row-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1"/></svg></div>
+          <div class="row-body"><div class="row-title">Reflets spéculaires</div><div class="row-desc">Halo lumineux fin sur les bords supérieurs</div></div>
+          <button class="ios-switch on" data-switch><div class="thumb"></div></button>
+        </div>
+        <div class="row">
+          <div class="row-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/></svg></div>
+          <div class="row-body"><div class="row-title">Bordures nettes</div><div class="row-desc">Contour très fin, capte la lumière</div></div>
+          <span class="badge">Premium</span>
+        </div>
+      </div>
+
+      <div class="buttons-card glass">
+        <h2>Boutons</h2>
+        <button class="glass-btn">Glass Button</button>
+        <button class="glass-btn">Elevated Glass Button</button>
+        <button class="glass-btn prominent" id="open-modal">Primary Glass Button</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <h2 id="modal-title">Vérification du compte</h2>
+    <p id="modal-desc">Votre compte est confirmé. La vérification reste valable 12 mois et s'applique à l'ensemble de vos actions.</p>
+    <div class="modal-actions">
+      <button class="modal-btn confirm" id="modal-confirm">Confirmer</button>
+      <button class="modal-btn" id="modal-cancel">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cursor-tracked specular highlight on every glass surface
+  document.querySelectorAll('.glass, .glass-btn').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  // Morphing nav indicator — slides + resizes to the active item
+  var navList = document.getElementById('nav-list');
+  var indicator = document.getElementById('nav-indicator');
+  var navItems = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+
+  function moveIndicatorTo(item) {
+    var listRect = navList.getBoundingClientRect();
+    var itemRect = item.getBoundingClientRect();
+    indicator.style.height = itemRect.height + 'px';
+    indicator.style.transform = 'translateY(' + (itemRect.top - listRect.top) + 'px)';
+  }
+
+  navItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      navItems.forEach(function (i) { i.classList.remove('active'); });
+      item.classList.add('active');
+      moveIndicatorTo(item);
+    });
+  });
+
+  window.addEventListener('resize', function () {
+    var active = document.querySelector('[data-nav].active');
+    if (active) moveIndicatorTo(active);
+  });
+
+  requestAnimationFrame(function () {
+    moveIndicatorTo(document.querySelector('[data-nav].active'));
+  });
+
+  // iOS switches
+  document.querySelectorAll('[data-switch]').forEach(function (sw) {
+    sw.addEventListener('click', function () {
+      sw.classList.toggle('on');
+    });
+  });
+
+  // Confirmation dialog — Focus Glass
+  var modalOverlay = document.getElementById('modal-overlay');
+  var openModalBtn = document.getElementById('open-modal');
+  var confirmBtn = document.getElementById('modal-confirm');
+  var cancelBtn = document.getElementById('modal-cancel');
+  var lastFocused = null;
+
+  function openModal() {
+    lastFocused = document.activeElement;
+    modalOverlay.classList.add('open');
+    confirmBtn.focus();
+    document.addEventListener('keydown', onModalKeydown);
+  }
+  function closeModal() {
+    modalOverlay.classList.remove('open');
+    document.removeEventListener('keydown', onModalKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  function onModalKeydown(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  openModalBtn.addEventListener('click', openModal);
+  confirmBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', function (e) {
+    if (e.target === modalOverlay) closeModal();
+  });
+</script>
+
+</body>
+</html>

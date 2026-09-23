@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass — SaaS UI Kit</title>
+<link rel="stylesheet" href="liquid-glass.css">
+<script>
+  (function () {
+    var saved = localStorage.getItem('lg-theme');
+    if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+  })();
+</script>
+</head>
+<body>
+
+<div class="lg-canvas" aria-hidden="true">
+  <div class="lg-blob lg-blob--a"></div>
+  <div class="lg-blob lg-blob--b"></div>
+  <div class="lg-blob lg-blob--c"></div>
+</div>
+
+<div style="position:relative; z-index:1; display:flex; min-height:100dvh; max-width:1360px; margin:0 auto; padding:28px 24px; gap:20px;">
+
+  <!-- Sidebar -->
+  <nav class="lg-1 lg-sidebar" aria-label="Navigation principale">
+    <div style="display:flex; align-items:center; gap:10px; padding:8px 12px 20px;">
+      <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg, rgba(255,255,255,.9), rgba(214,226,236,.6));border:1px solid rgba(255,255,255,.7);"></div>
+      <strong style="font-size:15px;">Nimbus</strong>
+    </div>
+
+    <a class="lg-nav-item is-active" href="#" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Overview
+    </a>
+    <a class="lg-nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V10M12 19V5M20 19v-7"/></svg>
+      Analytics
+    </a>
+    <a class="lg-nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+      Dashboard
+    </a>
+    <a class="lg-nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Projects
+    </a>
+    <a class="lg-nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+
+    <div style="margin-top:auto;">
+      <a class="lg-nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main style="flex:1; min-width:0; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- Top bar -->
+    <header style="display:flex; align-items:center; justify-content:space-between;">
+      <h1 style="margin:0; font-size:26px; font-weight:700; letter-spacing:-0.02em;">Overview</h1>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="lg-2" type="button" id="theme-toggle" aria-label="Basculer le thème sombre" aria-pressed="false" style="position:relative; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--lg-ink-600); cursor:pointer;">
+          <svg id="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg id="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="lg-2" type="button" aria-label="Notifications (1 non lue)" style="position:relative; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--lg-ink-600); cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span aria-hidden="true" style="position:absolute; top:9px; right:10px; width:8px; height:8px; border-radius:50%; background:var(--lg-accent-coral); border:1.5px solid #fff;"></span>
+        </button>
+        <button class="lg-2" type="button" style="display:flex; align-items:center; gap:10px; padding:6px 14px 6px 6px; border-radius:var(--lg-radius-pill); cursor:pointer; color:var(--lg-ink-900); font-weight:600; font-size:14px;">
+          <span aria-hidden="true" style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#cdd9e6,#eef1f5);"></span>
+          Salemian
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat cards -->
+    <section style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;" aria-label="Indicateurs">
+      <article class="lg-1 lg-card">
+        <span class="lg-card__label">Revenu (30j)</span>
+        <span class="lg-card__value">$36,204</span>
+        <span class="lg-card__meta">▲ 12.4%</span>
+        <button class="lg-btn lg-btn--elevated" type="button" style="margin-top:12px; align-self:flex-start;">+ Choisir un plan</button>
+      </article>
+
+      <article class="lg-2 lg-card">
+        <span class="lg-card__label">Utilisateurs actifs</span>
+        <span class="lg-card__value">3,527</span>
+        <span class="lg-card__meta">▲ 5.8% ce mois</span>
+      </article>
+
+      <article class="lg-3 lg-card">
+        <h2 style="margin:0 0 6px; font-size:15px; font-weight:700;">Profil</h2>
+        <label class="lg-sr-only" for="first-name">Prénom</label>
+        <div class="lg-2" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:var(--lg-radius-sm); margin-bottom:8px;">
+          <input id="first-name" type="text" placeholder="Prénom" style="border:0; background:transparent; font-size:14px; color:var(--lg-ink-900); outline:none; width:100%;">
+        </div>
+        <label class="lg-sr-only" for="status-field">Statut</label>
+        <div class="lg-2" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:var(--lg-radius-sm);">
+          <input id="status-field" type="password" value="verified" style="border:0; background:transparent; font-size:14px; color:var(--lg-ink-900); outline:none; width:100%;">
+          <button type="button" aria-label="Afficher le statut" class="lg-btn" style="min-height:32px; padding:0 10px; background:transparent; border:none; box-shadow:none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Lower section -->
+    <section style="display:grid; grid-template-columns:1.4fr 1fr; gap:20px; align-items:start;">
+
+      <div class="lg-3" style="padding:8px;">
+        <h2 style="margin:8px 12px 6px; font-size:16px; font-weight:700;">Apparence du verre</h2>
+
+        <div class="lg-row" role="group" aria-label="Synchronisation multi-appareils">
+          <div class="lg-row__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 21h8"/></svg>
+          </div>
+          <div class="lg-row__body">
+            <div class="lg-row__title">Translucidité</div>
+            <div class="lg-row__desc">Légère teinte colorée sur toutes les surfaces</div>
+          </div>
+          <button class="lg-toggle" type="button" role="switch" aria-checked="true" aria-label="Activer la translucidité">
+            <span class="lg-toggle__thumb"></span>
+          </button>
+        </div>
+
+        <div class="lg-row">
+          <div class="lg-row__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div class="lg-row__body">
+            <div class="lg-row__title">Frost</div>
+            <div class="lg-row__desc">Réfraction douce de l'arrière-plan</div>
+          </div>
+          <button class="lg-toggle" type="button" role="switch" aria-checked="true" aria-label="Activer le frost">
+            <span class="lg-toggle__thumb"></span>
+          </button>
+        </div>
+
+        <div class="lg-row">
+          <div class="lg-row__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          </div>
+          <div class="lg-row__body">
+            <div class="lg-row__title">Reflets spéculaires</div>
+            <div class="lg-row__desc">Halo lumineux fin sur les bords supérieurs</div>
+          </div>
+          <button class="lg-toggle" type="button" role="switch" aria-checked="true" aria-label="Activer les reflets spéculaires">
+            <span class="lg-toggle__thumb"></span>
+          </button>
+        </div>
+
+        <div class="lg-row">
+          <div class="lg-row__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18"/></svg>
+          </div>
+          <div class="lg-row__body">
+            <div class="lg-row__title">Bordures nettes</div>
+            <div class="lg-row__desc">Contour très fin, capte la lumière</div>
+          </div>
+          <span class="lg-badge">Premium</span>
+        </div>
+      </div>
+
+      <div class="lg-1 lg-card" aria-label="Boutons">
+        <h2 style="margin:0 0 4px; font-size:16px; font-weight:700;">Boutons</h2>
+        <button class="lg-btn" type="button">Glass Button</button>
+        <button class="lg-btn lg-btn--elevated" type="button">Elevated Glass Button</button>
+        <button class="lg-btn lg-btn--primary" type="button" id="open-modal">Primary Glass Button</button>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<!-- Modal — Focus Glass -->
+<div class="lg-modal-overlay" id="modal-overlay" hidden>
+  <div class="lg-4 lg-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <button class="lg-modal__close" id="modal-close" type="button" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h2 id="modal-title">Vérification du compte</h2>
+    <p id="modal-desc">Votre compte est confirmé. La vérification reste valable 12 mois et s'applique à l'ensemble de vos actions.</p>
+    <div class="lg-modal__actions">
+      <button class="lg-btn" type="button" id="modal-cancel">Annuler</button>
+      <button class="lg-btn lg-btn--elevated" type="button" id="modal-confirm">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dark theme toggle
+  var themeBtn = document.getElementById('theme-toggle');
+  var sunIcon = document.getElementById('theme-icon-sun');
+  var moonIcon = document.getElementById('theme-icon-moon');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function isDark() {
+    var explicit = document.documentElement.dataset.theme;
+    if (explicit === 'dark') return true;
+    if (explicit === 'light') return false;
+    return prefersDark.matches;
+  }
+  function syncIcon() {
+    var dark = isDark();
+    sunIcon.style.display = dark ? 'none' : '';
+    moonIcon.style.display = dark ? '' : 'none';
+    themeBtn.setAttribute('aria-pressed', String(dark));
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('lg-theme', next);
+    syncIcon();
+  });
+  prefersDark.addEventListener('change', function () {
+    if (!document.documentElement.dataset.theme) syncIcon();
+  });
+  syncIcon();
+
+  // Toggles
+  document.querySelectorAll('.lg-toggle').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var on = t.getAttribute('aria-checked') === 'true';
+      t.setAttribute('aria-checked', String(!on));
+    });
+  });
+
+  // Modal
+  var overlay = document.getElementById('modal-overlay');
+  var openBtn = document.getElementById('open-modal');
+  var closeBtn = document.getElementById('modal-close');
+  var cancelBtn = document.getElementById('modal-cancel');
+  var confirmBtn = document.getElementById('modal-confirm');
+  var lastFocused = null;
+
+  function openModal() {
+    lastFocused = document.activeElement;
+    overlay.hidden = false;
+    closeBtn.focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+  function closeModal() {
+    overlay.hidden = true;
+    document.removeEventListener('keydown', onKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  function onKeydown(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  confirmBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+</script>
+
+</body>
+</html>
